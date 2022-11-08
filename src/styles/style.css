@@ -102,3 +102,30 @@ h2 {
     transform: rotate(360deg);
   }
 }
+
+/* seen */
+.seen {
+  background-color: #fff6a5;
+}
+
+.svg-seen * {
+  fill: green;
+}
+
+.alert {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+
+  background: rgba(44, 44, 44, 0.74);
+  color: white;
+  border-radius: 8px;
+  padding: 7px;
+}
+
+.header {
+  position: relative;
+}

@@ -6,14 +6,21 @@ import getDate from "../utilities/getDate.js";
 import { useState } from "react";
 import { useEffect } from "react";
 
+import Alert from './Alert';
 import Spinner from './Spinner';
+import cn from "classnames";
 
 const Card = ({ data, imgURL }) => {
   const [url, setUrl] = useState(null);
+  const [seen, setSeen] = useState(data.seen);
+
+  const cardClasses = cn("card", {
+    "seen svg-seen": seen
+  });
  
   useEffect(() => {
     const fetchUrl= async () => {
-      const res = await axios.get('https://source.unsplash.com/random');
+      const res = await axios.get('https://source.unsplash.com/random/400x400');
       setUrl(res.request.responseURL);
     };
 
@@ -21,10 +28,13 @@ const Card = ({ data, imgURL }) => {
   }, []);
 
   return (
-    <div className="card" id={data.id}>
+    <div className={cardClasses} id={data.id}>
       {!url && <Spinner/>}
       <div className={!url && 'not-display'}>
-        <img src={url && url} alt="" />
+        <div className="header">
+          <img src={url && url} alt="" />
+          {seen && <Alert />}
+        </div>
         <div className="footer">
           <div className="row-1 d-flex">
             <div className="old-price flex-item f-grow">{data.oldPrice} Р</div>
