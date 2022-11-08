@@ -8,11 +8,13 @@ import { useEffect } from "react";
 
 import Alert from './Alert';
 import Spinner from './Spinner';
+import CardCarousel from "./CardCarousel";
+
 import cn from "classnames";
 
-const Card = ({ data, imgURL }) => {
+const Card = ({ data, imgURL , addDownloaded }) => {
   const [url, setUrl] = useState(null);
-  const [seen, setSeen] = useState(data.seen);
+  const [seen] = useState(data.seen);
 
   const cardClasses = cn("card", {
     "seen svg-seen": seen
@@ -22,6 +24,7 @@ const Card = ({ data, imgURL }) => {
     const fetchUrl= async () => {
       const res = await axios.get('https://source.unsplash.com/random/400x400');
       setUrl(res.request.responseURL);
+      addDownloaded();
     };
 
     fetchUrl();
@@ -32,7 +35,8 @@ const Card = ({ data, imgURL }) => {
       {!url && <Spinner/>}
       <div className={!url && 'not-display'}>
         <div className="header">
-          <img src={url && url} alt="" />
+          <CardCarousel url={ url && url }/>
+          {/* <img src={url && url} alt="" /> */}
           {seen && <Alert />}
         </div>
         <div className="footer">

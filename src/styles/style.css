@@ -4,9 +4,11 @@
 }
 
 .card {
+  position: relative;
   width: 320px;
   border-radius: 20px 20px 0px 0px;
   margin: 20px;
+  border: 0;
   overflow: hidden;
 }
 
@@ -64,7 +66,7 @@ img {
 
 .main-container {
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 h2 {
@@ -80,7 +82,7 @@ h2 {
 
 /* spinner */
 .pos-center {
-  position: fixed;
+  position: absolute;
   top: calc(50% - 40px);
   left: calc(50% - 40px);
 }
