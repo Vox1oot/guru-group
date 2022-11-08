@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import Card from "./components/Card";
+import getProducts from "./utilities/getProducts";
+import imgURL from "./utilities/imgURL";
 
-function App() {
+const App = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(async () => {
+    const products = await getProducts();
+    setProducts(products);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h2>Похожие объявления</h2>
+      <div className="d-flex main-container">
+        {products.map((product) => (
+          <Card key={product.id && product.id} data={product && product} imgURL={imgURL}/>
+        ))}
+      </div>
+    </>
   );
 }
 
